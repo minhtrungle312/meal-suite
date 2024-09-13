@@ -11,12 +11,14 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./list-task/list-task.module").then((m) => m.ListTaskModule),
+      import("./task-widget/list-task/list-task.module").then(
+        (m) => m.ListTaskModule
+      ),
   },
   {
     path: "detail",
     loadChildren: () =>
-      import("./task-detail/task-detail.module").then(
+      import("./task-widget/task-detail/task-detail.module").then(
         (m) => m.TaskDetailModule
       ),
   },
@@ -33,7 +35,6 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
   ],

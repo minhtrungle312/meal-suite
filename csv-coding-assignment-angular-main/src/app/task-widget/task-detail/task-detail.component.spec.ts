@@ -2,12 +2,12 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { TaskDetailComponent } from "./task-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BackendService } from "../backend.service";
+import { BackendService } from "../../backend.service";
 import { FormBuilder } from "@angular/forms";
 import { of, throwError } from "rxjs";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { TaskService } from "../service/task-service.service";
+import { TaskService } from "../../service/task-service.service";
 
 describe("TaskDetailComponent", () => {
   let component: TaskDetailComponent;

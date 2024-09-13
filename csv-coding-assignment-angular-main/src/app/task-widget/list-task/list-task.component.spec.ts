@@ -6,7 +6,7 @@ import { FormBuilder } from "@angular/forms";
 import { of } from "rxjs";
 import { By } from "@angular/platform-browser";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { TaskService } from "../service/task-service.service";
+import { TaskService } from "../../service/task-service.service";
 
 describe("ListTaskComponent", () => {
   let component: ListTaskComponent;

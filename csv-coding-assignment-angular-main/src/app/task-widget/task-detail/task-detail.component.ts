@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { finalize, takeUntil } from "rxjs/operators";
-import { BackendService, Task, User } from "../backend.service";
-import { TaskService } from "../service/task-service.service";
+import { BackendService, Task, User } from "../../backend.service";
+import { TaskService } from "../../service/task-service.service";
 
 @Component({
   selector: "app-task-detail",
@@ -29,7 +29,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private backendService: BackendService,
-    private taskServiceService: TaskService,
+    private taskService: TaskService,
     private formBuilder: FormBuilder,
     private router: Router,
     private cd: ChangeDetectorRef
@@ -56,7 +56,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
           },
         });
     }
-    this.taskServiceService
+    this.taskService
       .getData()
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ users }) => {
@@ -76,7 +76,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.taskServiceService.showSuccess("Task added successfully");
+          this.taskService.showSuccess("Task added successfully");
           this.backToList();
         },
         error: (err) => {
@@ -92,7 +92,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.taskServiceService.showSuccess("Task completed");
+          this.taskService.showSuccess("Task completed");
           this.backToList();
         },
         error: (err) => {
@@ -108,7 +108,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.taskServiceService.showSuccess("Task assigned");
+          this.taskService.showSuccess("Task assigned");
           this.backToList();
         },
         error: (err) => {
@@ -122,6 +122,6 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
   }
 
   private handleError(err: any): void {
-    this.taskServiceService.showError(err);
+    this.taskService.showError(err);
   }
 }

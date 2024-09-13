@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { Task, User } from "../backend.service";
-import { TaskService } from "../service/task-service.service";
-import { TABLE_DTO, FilterType, TASK_STATUS, TaskDto } from "../models";
+import { Task, User } from "../../backend.service";
+import { FilterType, TABLE_DTO, TASK_STATUS, TaskDto } from "../../models";
+import { TaskService } from "../../service/task-service.service";
 
 @Component({
   selector: "app-list-task",
@@ -66,7 +66,7 @@ export class ListTaskComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  clearSearch():void {
+  clearSearch(): void {
     this.tasks = this.tasksCopy;
     this.cd.detectChanges();
   }
