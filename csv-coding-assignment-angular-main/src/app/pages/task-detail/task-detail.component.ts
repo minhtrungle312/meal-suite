@@ -22,6 +22,7 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
     completed: [false, []],
   });
 
+  // get enable button by form valid
   get getEnableButton(): boolean {
     return this.taskForm.invalid;
   }
@@ -38,30 +39,9 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.route?.snapshot?.paramMap?.get("id");
     if (this.id) {
-      this.backendService
-        .task(Number(this.id))
-        .pipe(
-          takeUntil(this.destroy$),
-          finalize(() => {
-            this.cd.detectChanges();
-          })
-        )
-        .subscribe({
-          next: (res) => {
-            this.task = res;
-            this.taskForm.patchValue(this.task);
-          },
-          error: (err) => {
-            this.handleError(err);
-          },
-        });
+      this.getTaskById();
     }
-    this.taskService
-      .getData()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ users }) => {
-        this.users = users;
-      });
+    this.getData();
   }
 
   ngOnDestroy(): void {
@@ -123,5 +103,34 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
 
   private handleError(err: any): void {
     this.taskService.showError(err);
+  }
+
+  private getData(): void {
+    this.taskService
+      .getData()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ users }) => {
+        this.users = users;
+      });
+  }
+
+  private getTaskById(): void {
+    this.backendService
+      .task(Number(this.id))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => {
+          this.cd.detectChanges();
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.task = res;
+          this.taskForm.patchValue(this.task);
+        },
+        error: (err) => {
+          this.handleError(err);
+        },
+      });
   }
 }

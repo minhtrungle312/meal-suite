@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private taskService: TaskService, private router: Router) {}
 
   ngOnInit() {
+    // load data tasks and user
     this.taskService.loadData().pipe(takeUntil(this.destroy$)).subscribe();
   }
   ngOnDestroy(): void {

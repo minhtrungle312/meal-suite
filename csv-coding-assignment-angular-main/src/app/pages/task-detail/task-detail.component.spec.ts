@@ -94,7 +94,7 @@ describe("TaskDetailComponent", () => {
       description: "Description 1",
       completed: false,
     };
-
+    component.id = "";
     fixture.detectChanges();
   });
 
@@ -103,7 +103,6 @@ describe("TaskDetailComponent", () => {
   });
 
   it("should create task error", () => {
-    component.id = "";
     spyOn(taskSerivce, "showError");
     spyOn(backendServiceSpy, "newTask").and.returnValue(
       throwError(() => ({ status: 400 }))
@@ -113,7 +112,6 @@ describe("TaskDetailComponent", () => {
   });
 
   it("should create task success", () => {
-    component.id = "";
     spyOn(taskSerivce, "showSuccess");
     spyOn(backendServiceSpy, "newTask").and.returnValue(of({}));
     component.addTask();
@@ -121,7 +119,6 @@ describe("TaskDetailComponent", () => {
   });
 
   it("should navigate to list", () => {
-    component.id = "";
     const btnAdd = fixture.debugElement.query(By.css(".back-to-list"));
     btnAdd.triggerEventHandler("click", "");
     expect(routerSpy.navigate).toHaveBeenCalledWith([""]);

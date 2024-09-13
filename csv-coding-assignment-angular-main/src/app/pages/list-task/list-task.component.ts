@@ -11,12 +11,12 @@ import { TaskService } from "../../service/task-service.service";
   templateUrl: "./list-task.component.html",
 })
 export class ListTaskComponent implements OnInit, OnDestroy {
+  readonly TableTto = TABLE_DTO;
+  readonly taskStatus = TASK_STATUS;
   destroy$ = new Subject<void>();
   tasks: TaskDto[] = [];
   tasksCopy: TaskDto[] = [];
   users: User[] = [];
-  TableTto = TABLE_DTO;
-  taskStatus = TASK_STATUS;
   FilterType: FilterType;
 
   constructor(
