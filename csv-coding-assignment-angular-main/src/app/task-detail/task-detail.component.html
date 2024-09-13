@@ -1,0 +1,57 @@
+<button class="btn back-to-list" type="button" (click)="backToList()">
+  Back to list
+</button>
+<form [formGroup]="taskForm" class="max-w-md mx-auto">
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input
+      formControlName="description"
+      class="form-control"
+      placeholder="Enter tasks"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="filterUser" class="form-label">Assignee</label>
+    <ng-select
+      id="filterUser"
+      name="filterUser"
+      formControlName="assigneeId"
+      [items]="users"
+      bindLabel="name"
+      bindValue="id"
+    >
+    </ng-select>
+  </div>
+  <span>Status:&nbsp;</span>
+  <input type="checkbox" class="checkmark" formControlName="completed" />
+  <div *ngIf="!!id; else addTempplate" class="d-flex justify-content-end">
+    <button
+      [disabled]="getEnableButton"
+      type="submit"
+      class="btn btn-primary mx-2"
+      (click)="assignTask()"
+    >
+      Assign Task
+    </button>
+    <button
+      [disabled]="getEnableButton"
+      type="button"
+      class="btn btn-success mx-2"
+      (click)="completeTask()"
+    >
+      Complete Task
+    </button>
+  </div>
+  <ng-template #addTempplate>
+    <div class="d-flex justify-content-end">
+      <button
+        [disabled]="getEnableButton"
+        type="submit"
+        class="btn btn-primary"
+        (click)="addTask()"
+      >
+        Add Task
+      </button>
+    </div>
+  </ng-template>
+</form>
