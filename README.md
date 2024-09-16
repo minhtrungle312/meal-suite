@@ -1,4 +1,4 @@
-
+In terms of development time, I completed this project in 2 working hours.
 
 # Getting Started
 
